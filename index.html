@@ -1,33 +1,13 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Destiny 2 Profil</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
-      #profile-info {
-        margin-top: 20px;
-      }
-    </style>
+    <title>Destiny 2 API Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
   </head>
   <body>
-    <h1>Destiny 2 Profil</h1>
-    <a
-      href="https://www.bungie.net/en/oauth/authorize?client_id=44038&response_type=code"
-      >Authorize</a
-    >
-
-    <button id="linkButton">Získat přístupový token</button>
-
-    <form id="search-form">
-      <label for="membership-id">Membership ID:</label>
-      <input type="text" id="membership-id" required />
-      <button type="submit">Získat profil</button>
-    </form>
-    <div id="profile-info"></div>
-    <script src="script.js"></script>
+    <h1>Destiny 2 API Demo</h1>
+    <button onclick="redirectToAuthorization()">Autorizovat</button>
   </body>
 </html>
