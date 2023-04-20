@@ -1,36 +1,101 @@
-const urlParams = new URLSearchParams(window.location.search);
-const authorizationCode = urlParams.get("code");
+document
+  .getElementById("linkButton")
+  .addEventListener("click", function (event) {
+    const bungie_client_id = "44038"; // Nahraďte svým skutečným client_id
+    const bungie_client_secret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU"; // Nahraďte svým skutečným client_secret
+    const authCode = "c75397005633d988f94b427fe135a36f"; // Nahraďte svým skutečným autorizačním kódem
 
-if (authorizationCode) {
-  const clientId = "44038";
-  const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
-  const grantType = "authorization_code";
-
-  const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
-  const headers = {
-    "Content-Type": "application/x-www-form-urlencoded",
-    Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
-  };
-  const data = new URLSearchParams({
-    client_id: clientId,
-    code: authorizationCode,
-    grant_type: grantType,
+    fetch("https://www.bungie.net/Platform/App/OAuth/token/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${window.btoa(
+          `${bungie_client_id}:${bungie_client_secret}`
+        )}`,
+      },
+      body: new URLSearchParams({
+        client_id: bungie_client_id,
+        grant_type: "authorization_code",
+        code: authCode,
+      }).toString(),
+    })
+      .then(function (response) {
+        console.log(response);
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        // Zde můžete provádět další akce s přístupovým tokenem, např. získání profilu hráče.
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   });
 
-  fetch(tokenUrl, {
-    method: "POST",
-    headers: headers,
-    body: data,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data.access_token);
-      // Zde můžete provádět další akce s přístupovým tokenem, např. získání profilu hráče.
-    })
-    .catch((error) => console.error(error));
-} else {
-  console.log("Autorizační kód není k dispozici.");
-}
+// const authorizationCode = "e1cba45c83aeef366e2500abcea1614c"; // Nahraďte hodnotou svého platného autorizačního kódu.
+
+// if (authorizationCode) {
+//   const clientId = "44038";
+//   const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
+//   const grantType = "authorization_code";
+
+//   const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
+//   const headers = {
+//     "Content-Type": "application/x-www-form-urlencoded",
+//     Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
+//   };
+//   const data = new URLSearchParams({
+//     code: authorizationCode,
+//     grant_type: grantType,
+//   });
+
+//   fetch(tokenUrl, {
+//     method: "POST",
+//     headers: headers,
+//     body: data,
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log(data.access_token);
+//       // Zde můžete provádět další akce s přístupovým tokenem, např. získání profilu hráče.
+//     })
+//     .catch((error) => console.error(error));
+// } else {
+//   console.log("Autorizační kód není k dispozici.");
+// }
+
+// const urlParams = new URLSearchParams(window.location.search);
+// const authorizationCode = urlParams.get("code");
+
+// if (authorizationCode) {
+//   const clientId = "44038";
+//   const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
+//   const grantType = "authorization_code";
+
+//   const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
+//   const headers = {
+//     "Content-Type": "application/x-www-form-urlencoded",
+//     Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
+//   };
+//   const data = new URLSearchParams({
+//     code: authorizationCode,
+//     grant_type: grantType,
+//   });
+
+//   fetch(tokenUrl, {
+//     method: "POST",
+//     headers: headers,
+//     body: data,
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log(data.access_token);
+//       // Zde můžete provádět další akce s přístupovým tokenem, např. získání profilu hráče.
+//     })
+//     .catch((error) => console.error(error));
+// } else {
+//   console.log("Autorizační kód není k dispozici.");
+// }
 
 // const clientId = "44038";
 // const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
