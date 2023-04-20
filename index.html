@@ -21,8 +21,8 @@
         window.open(authUrl, "_blank");
       }
 
-      // Funkce pro získání autorizačního tokenu z odpovědi API
-      async function getToken(code) {
+      // Funkce pro získání refresh tokenu z odpovědi API
+      async function getRefreshToken(code) {
         const clientId = "44038"; // Váš klient ID získaný od Bungie.net
         const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU"; // Váš tajný klíč získaný od Bungie.net
         const redirectUri = "https://mrkindesign.github.io/"; // Vaše přesměrovací URI registravané u Bungie.net
@@ -30,6 +30,23 @@
         const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
         const body = `grant_type=authorization_code&code=${code}&client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=${redirectUri}`;
 
+        const response = await axios.post(tokenUrl, body, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-API-Key": apiKey, // Přidání API klíče do hlavičky
+          },
+        });
+
+        return response.data.refresh_token;
+      }
+
+      // Funkce pro získání nového access tokenu pomocí refresh tokenu
+      async function getAccessToken(refreshToken) {
+        const clientId = "44038"; // Váš klient ID získaný od Bungie.net
+        const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU"; // Váš tajný klíč získaný od Bungie.net
+
+        const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
+        const body = `grant_type=refresh_token&refresh_token=${refreshToken}&client_id=${clientId}&client_secret=${clientSecret}`;
         const response = await axios.post(tokenUrl, body, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -62,7 +79,8 @@
         const code = urlParams.get("code");
 
         if (code) {
-          const token = await getToken(code);
+          const refreshToken = await getRefreshToken(code);
+          const token = await getAccessToken(refreshToken);
           const profileData = await getProfileData(token);
 
           // Zde můžete provést další operace s profileData, například zobrazit informace o uživateli na stránce
@@ -80,5 +98,6 @@
     <button id="authButton" onclick="authenticate()">
       Přihlásit se pomocí Destiny 2
     </button>
+    sss
   </body>
 </html>
