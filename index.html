@@ -8,6 +8,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+      const apiKey = "YOUR-API-KEY-HERE"; // Váš API klíč získaný od Bungie.net
+
       function authenticate() {
         const clientId = "44038"; // Váš klient ID získaný od Bungie.net
         const redirectUri = "https://mrkindesign.github.io/"; // Vaše přesměrovací URI registravané u Bungie.net
@@ -31,6 +33,7 @@
         const response = await axios.post(tokenUrl, body, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
+            "X-API-Key": apiKey, // Přidání API klíče do hlavičky
           },
         });
 
@@ -39,14 +42,14 @@
 
       // Funkce pro získání profilových informací o uživateli z API Destiny 2
       async function getProfileData(token) {
-        const membershipType = 3; // Typ účtu (3 pro Xbox, 4 pro PlayStation, 5 pro Steam, 10 pro Stadia)
-        const membershipId = "your-membership-id"; // ID účtu Destiny 2 uživatele, získané z odpovědi API autorizace
+        const membershipType = 5; // Typ účtu (3 pro Xbox, 4 pro PlayStation, 5 pro Steam, 10 pro Stadia)
+        const membershipId = "4611686018528150250"; // ID účtu Destiny 2 uživatele, získané z odpovědi API autorizace
         const components = "100"; // Kód komponentu pro získání profilových informací
         const profileUrl = `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=${components}`;
-
         const response = await axios.get(profileUrl, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "X-API-Key": apiKey, // Přidání API klíče do hlavičky
           },
         });
 
