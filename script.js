@@ -1,31 +1,42 @@
-const clientId = "44038";
-const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
-const authorizationCode = "91323b576a3ec18b901134308f17a6b0";
-const grantType = "authorization_code";
+const urlParams = new URLSearchParams(window.location.search);
+const authorizationCode = urlParams.get("code");
 
-const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
-const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-const data = new URLSearchParams({
-  client_id: clientId,
-  client_secret: clientSecret,
-  code: authorizationCode,
-  grant_type: grantType,
-});
+if (authorizationCode) {
+  const clientId = "44038";
+  const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
+  const grantType = "authorization_code";
 
-fetch(tokenUrl, {
-  method: "POST",
-  headers: headers,
-  body: data,
-})
-  .then((response) => response.json())
-  .then((data) => console.log(data.access_token))
-  .catch((error) => console.error(error));
+  const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
+  };
+  const data = new URLSearchParams({
+    client_id: clientId,
+    code: authorizationCode,
+    grant_type: grantType,
+  });
+
+  fetch(tokenUrl, {
+    method: "POST",
+    headers: headers,
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.access_token);
+      // Zde můžete provádět další akce s přístupovým tokenem, např. získání profilu hráče.
+    })
+    .catch((error) => console.error(error));
+} else {
+  console.log("Autorizační kód není k dispozici.");
+}
 
 // const clientId = "44038";
 // const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
 // const authorizationUrl = "https://www.bungie.net/en/OAuth/Authorize";
 // const grant_type = "authorization_token";
-// const authorizationCode = "91323b576a3ec18b901134308f17a6b0";
+//const authorizationCode = "91323b576a3ec18b901134308f17a6b0";
 
 // const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
 // const headers = { "Content-Type": "application/x-www-form-urlencoded" };
