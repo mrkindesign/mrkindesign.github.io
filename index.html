@@ -1,13 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Destiny 2 API Demo</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      function authenticate() {
+        const clientId = "44038"; // Váš klient ID získaný od Bungie.net
+        const redirectUri = "https://mrkindesign.github.io/"; // Vaše přesměrovací URI registravané u Bungie.net
+
+        // Adresa pro požádání o autorizaci uživatele k přístupu k účtu Destiny 2
+        const authUrl = `https://www.bungie.net/en/OAuth/Authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}`;
+
+        // Otevře se okno s adresou pro autorizaci uživatele
+        window.open(authUrl, "_blank");
+      }
+
+      // Funkce pro získání autorizačního tokenu z odpovědi API
+      async function getToken(code) {
+        const clientId = "44038"; // Váš klient ID získaný od Bungie.net
+        const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU"; // Váš tajný klíč získaný od Bungie.net
+        const redirectUri = "https://mrkindesign.github.io/"; // Vaše přesměrovací URI registravané u Bungie.net
+
+        const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
+        const body = `grant_type=authorization_code&code=${code}&client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=${redirectUri}`;
+
+        const response = await axios.post(tokenUrl, body, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        });
+
+        return response.data.access_token;
+      }
+
+      // Funkce pro získání profilových informací o uživateli z API Destiny 2
+      async function getProfileData(token) {
+        const membershipType = 3; // Typ účtu (3 pro Xbox, 4 pro PlayStation, 5 pro Steam, 10 pro Stadia)
+        const membershipId = "your-membership-id"; // ID účtu Destiny 2 uživatele, získané z odpovědi API autorizace
+        const components = "100"; // Kód komponentu pro získání profilových informací
+        const profileUrl = `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=${components}`;
+
+        const response = await axios.get(profileUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        return response.data.Response;
+      }
+
+      // Funkce, která získá autorizační token po úspěšné autorizaci uživatele
+      async function handleAuthCallback() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get("code");
+
+        if (code) {
+          const token = await getToken(code);
+          const profileData = await getProfileData(token);
+
+          // Zde můžete provést další operace s profileData, například zobrazit informace o uživateli na stránce
+          console.log(profileData);
+        } else {
+          console.error("Autorizační kód nebyl nalezen.");
+        }
+      }
+
+      // Pokud uživatel vrátí z autorizační stránky s platným autorizačním kódem, zavolá se funkce handleAuthCallback()
+      window.onload = handleAuthCallback;
+    </script>
   </head>
   <body>
-    <h1>Destiny 2 API Demo</h1>
-    <button onclick="redirectToAuthorization()">Autorizovat</button>
+    <button id="authButton" onclick="authenticate()">
+      Přihlásit se pomocí Destiny 2
+    </button>
   </body>
 </html>
