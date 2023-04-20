@@ -1,0 +1,91 @@
+const clientId = "44038";
+const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
+const authorizationUrl = "https://www.bungie.net/en/OAuth/Authorize";
+const grantType = "authorization_code";
+const authorizationCode = "14350d27f946e8dcebab0439e1c235bd";
+
+const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
+const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+const data = new URLSearchParams({
+  client_id: clientId,
+  client_secret: clientSecret,
+  code: authorizationCode,
+  grant_type: grantType,
+});
+
+// Odeslání POST požadavku pro získání přístupového tokenu
+fetch(tokenUrl, {
+  method: "POST",
+  headers: headers,
+  body: data,
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data.access_token))
+  .catch((error) => console.error(error));
+
+// const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
+// const clientId = "44038";
+// const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
+// const authorizationCode = "YOUR_AUTHORIZATION_CODE"; // Získejte tento kód z procesu OAuth 2.0
+// const redirectUri = "https://destinice.space"; // Tato hodnota musí být shodná s URL, která byla použita při registraci aplikace
+// const API_KEY = "e124a8f93b4a49a8b71f04b9e40503a8";
+
+// const requestOptions = {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/x-www-form-urlencoded",
+//   },
+//   body: new URLSearchParams({
+//     client_id: clientId,
+//     client_secret: clientSecret,
+//     grant_type: "authorization_code",
+//     code: authorizationCode,
+//     redirect_uri: redirectUri,
+//   }),
+// };
+
+// fetch(tokenUrl, requestOptions)
+//   .then((response) => response.json())
+//   .then((data) => {
+//     const accessToken = data.access_token;
+//     const refreshToken = data.refresh_token;
+//     console.log("Přístupový token:", accessToken);
+//     console.log("Obnovovací token:", refreshToken);
+
+//     // Uložte obnovovací token pro pozdější použití při obnovení přístupového tokenu
+//   })
+//   .catch((error) => console.error(error));
+
+// const apiKey = "e124a8f93b4a49a8b71f04b9e40503a8";
+// const accessToken = "váš_přístupový_token";
+// const membershipType = 3; // Steam
+// const membershipId = "4611686018528150250";
+// const url = `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=200`;
+
+// const headers = new Headers();
+// headers.append("X-API-Key", apiKey);
+// headers.append("Authorization", `Bearer ${accessToken}`);
+
+// fetch(url, {
+//   headers: headers,
+// })
+//   .then((response) => {
+//     if (response.ok) {
+//       return response.json();
+//     } else {
+//       throw new Error(`Chyba: ${response.status}`);
+//     }
+//   })
+//   .then((data) => {
+//     const characters = data.Response.characters.data;
+//     console.log(characters);
+
+//     // Zde můžete zpracovat a zobrazit data o postavách
+//     // Například vytisknout ID a třídu postavy:
+//     for (const characterId in characters) {
+//       console.log(
+//         `ID postavy: ${characterId}, třída postavy: ${characters[characterId].classType}`
+//       );
+//     }
+//   })
+//   .catch((error) => console.error(error));

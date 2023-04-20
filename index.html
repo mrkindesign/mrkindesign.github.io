@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Destiny 2 Profil</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      #profile-info {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Destiny 2 Profil</h1>
+    <a
+      href="https://www.bungie.net/en/oauth/authorize?client_id=44038&response_type=code"
+      >Autorizace Destiny 2 API</a
+    >
+    <form id="search-form">
+      <label for="membership-id">Membership ID:</label>
+      <input type="text" id="membership-id" required />
+      <button type="submit">Získat profil</button>
+    </form>
+    <div id="profile-info"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
