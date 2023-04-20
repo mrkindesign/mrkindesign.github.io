@@ -1,8 +1,7 @@
 const clientId = "44038";
 const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
-const authorizationUrl = "https://www.bungie.net/en/OAuth/Authorize";
+const authorizationCode = "91323b576a3ec18b901134308f17a6b0";
 const grantType = "authorization_code";
-const authorizationCode = "14350d27f946e8dcebab0439e1c235bd";
 
 const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
 const headers = { "Content-Type": "application/x-www-form-urlencoded" };
@@ -13,7 +12,6 @@ const data = new URLSearchParams({
   grant_type: grantType,
 });
 
-// Odeslání POST požadavku pro získání přístupového tokenu
 fetch(tokenUrl, {
   method: "POST",
   headers: headers,
@@ -22,6 +20,31 @@ fetch(tokenUrl, {
   .then((response) => response.json())
   .then((data) => console.log(data.access_token))
   .catch((error) => console.error(error));
+
+// const clientId = "44038";
+// const clientSecret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
+// const authorizationUrl = "https://www.bungie.net/en/OAuth/Authorize";
+// const grant_type = "authorization_token";
+// const authorizationCode = "91323b576a3ec18b901134308f17a6b0";
+
+// const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
+// const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+// const data = new URLSearchParams({
+//   client_id: clientId,
+//   client_secret: clientSecret,
+//   code: authorizationCode,
+//   grant_type: grantType,
+// });
+
+// // Odeslání POST požadavku pro získání přístupového tokenu
+// fetch(tokenUrl, {
+//   method: "POST",
+//   headers: headers,
+//   body: data,
+// })
+//   .then((response) => response.json())
+//   .then((data) => console.log(data.access_token))
+//   .catch((error) => console.error(error));
 
 // const tokenUrl = "https://www.bungie.net/platform/app/oauth/token/";
 // const clientId = "44038";
