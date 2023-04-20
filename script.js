@@ -1,36 +1,64 @@
-document
-  .getElementById("linkButton")
-  .addEventListener("click", function (event) {
-    const bungie_client_id = "44038"; // Nahraďte svým skutečným client_id
-    const bungie_client_secret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU"; // Nahraďte svým skutečným client_secret
-    const authCode = "c75397005633d988f94b427fe135a36f"; // Nahraďte svým skutečným autorizačním kódem
+// Předpokládáme, že jste již získali autorizační kód a hodnotu `state` ze zpětného volání URL
+const authCode = "349096f6103bbea1530dac3483a57062";
+const state = "6i0mkLx79Hp91nzWVeHrzHG4";
 
-    fetch("https://www.bungie.net/Platform/App/OAuth/token/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${window.btoa(
-          `${bungie_client_id}:${bungie_client_secret}`
-        )}`,
-      },
-      body: new URLSearchParams({
-        client_id: bungie_client_id,
-        grant_type: "authorization_code",
-        code: authCode,
-      }).toString(),
-    })
-      .then(function (response) {
-        console.log(response);
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        // Zde můžete provádět další akce s přístupovým tokenem, např. získání profilu hráče.
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+// Předpokládáme, že máte své vlastní client_id a client_secret
+const bungie_client_id = "44038";
+const bungie_client_secret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
+
+fetch("https://www.bungie.net/Platform/App/OAuth/token/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: `Basic ${window.btoa(
+      `${bungie_client_id}:${bungie_client_secret}`
+    )}`,
+  },
+  body: new URLSearchParams({
+    client_id: bungie_client_id,
+    grant_type: "authorization_code",
+    code: authCode,
+  }).toString(),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    // Zde můžete uložit nebo použít přístupový token a aktualizační token
   });
+
+// document
+//   .getElementById("linkButton")
+//   .addEventListener("click", function (event) {
+//     const bungie_client_id = "44038";
+//     const bungie_client_secret = "iAm99vYYKsYWcF9-g04u0Vy3G-XJOv0lPfXS4P4Z2cU";
+//     const authCode = "c75397005633d988f94b427fe135a36f";
+
+//     fetch("https://www.bungie.net/Platform/App/OAuth/token/", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/x-www-form-urlencoded",
+//         Authorization: `Basic ${window.btoa(
+//           `${bungie_client_id}:${bungie_client_secret}`
+//         )}`,
+//       },
+//       body: new URLSearchParams({
+//         client_id: bungie_client_id,
+//         grant_type: "authorization_code",
+//         code: authCode,
+//       }).toString(),
+//     })
+//       .then(function (response) {
+//         console.log(response);
+//         return response.json();
+//       })
+//       .then(function (data) {
+//         console.log(data);
+//         // Zde můžete provádět další akce s přístupovým tokenem, např. získání profilu hráče.
+//       })
+//       .catch(function (error) {
+//         console.error(error);
+//       });
+//   });
 
 // const authorizationCode = "e1cba45c83aeef366e2500abcea1614c"; // Nahraďte hodnotou svého platného autorizačního kódu.
 
