@@ -1,28 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --main-color: #14a83c;
+  --background-color: #131313;
+  --text-color: #ffffff;
+  --secondary-color: #2b2b2b;
+  --complement-color: #0f6b2c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #064e18;
+  background-color: var(--background-color);
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -5;
+}
+.background svg {
+  width: 100vw;
+  height: 180vh;
+  opacity: 0.2;
+}
+
+.background:nth-child(1) {
+  width: 10vw;
+}
+.background:nth-child(2) svg {
+  width: 100vw;
+  height: 200vh;
+}
+
 .container {
-  max-width: 800px;
+  /* background-color: rgb(255, 255, 255); */
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 100px;
+  font-family: "Montserrat", sans-serif;
+}
+.container::first-letter {
+  font-size: 250px;
 }
 
 h1 {
+  color: #ffffff;
+  padding-top: 250px;
+  padding-bottom: 50px;
+  font-size: 128px;
   text-align: center;
 }
 
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
+  column-count: 2;
+  column-gap: 20px;
 }
 
 .gallery img {
-  flex: 0 0 calc(33.33% - 20px);
-  max-width: calc(33.33% - 20px);
+  width: 100%;
   height: auto;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: inline-block;
   transition: transform 0.3s ease;
+  border-bottom: 12px solid #ffffff;
 }
 
 .gallery img:hover {
@@ -40,6 +92,19 @@ h1 {
   justify-content: center;
   align-items: center;
   z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal.hide {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .modal-content {
@@ -48,8 +113,122 @@ h1 {
 }
 
 .modal img {
-  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+  position: absolute;
+  z-index: 20;
+  top: 50px;
+  right: 50px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.tk-blob {
+  animation: blob-turn var(--time, 30s) linear infinite;
+  fill: var(--fill, #7600f8);
+  position: relative;
+  transform-origin: center;
+}
+
+.tk-blob svg {
+  animation: blob-skew calc(var(--time, 30s) * 0.5) linear 0s infinite;
+  transform-origin: center;
+}
+
+.tk-blob svg path {
+  animation: blob-scale calc(var(--time, 30s) * 0.5) ease-in-out 0s infinite;
+  transform-origin: center;
+}
+
+@keyframes blob-turn {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blob-skew {
+  0% {
+    transform: skewY(0deg);
+  }
+  13% {
+    transform: skewY(calc((1.8deg) * var(--amount, 2)));
+  }
+  18% {
+    transform: skewY(calc((2.2deg) * var(--amount, 2)));
+  }
+  24% {
+    transform: skewY(calc((2.48deg) * var(--amount, 2)));
+  }
+  25% {
+    transform: skewY(calc((2.5deg) * var(--amount, 2)));
+  }
+  26% {
+    transform: skewY(calc((2.48deg) * var(--amount, 2)));
+  }
+  32% {
+    transform: skewY(calc((2.2deg) * var(--amount, 2)));
+  }
+  37% {
+    transform: skewY(calc((1.8deg) * var(--amount, 2)));
+  }
+  50% {
+    transform: skewY(0deg);
+  }
+  63% {
+    transform: skewY(calc((-1.8deg) * var(--amount, 2)));
+  }
+  68% {
+    transform: skewY(calc((-2.2deg) * var(--amount, 2)));
+  }
+  74% {
+    transform: skewY(calc((-2.48deg) * var(--amount, 2)));
+  }
+  75% {
+    transform: skewY(calc((-2.5deg) * var(--amount, 2)));
+  }
+  76% {
+    transform: skewY(calc((-2.48deg) * var(--amount, 2)));
+  }
+  82% {
+    transform: skewY(calc((-2.2deg) * var(--amount, 2)));
+  }
+  87% {
+    transform: skewY(calc((-1.8deg) * var(--amount, 2)));
+  }
+  100% {
+    transform: skewY(0deg);
+  }
+}
+
+@keyframes blob-scale {
+  0% {
+    transform: scaleX(0.9) scaleY(1);
+  }
+  25% {
+    transform: scaleX(0.9) scaleY(0.9);
+  }
+  50% {
+    transform: scaleX(1) scaleY(0.9);
+  }
+  75% {
+    transform: scaleX(0.9) scaleY(0.9);
+  }
+  100% {
+    transform: scaleX(0.9) scaleY(1);
+  }
 }

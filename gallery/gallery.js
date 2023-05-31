@@ -27,15 +27,39 @@ function openModal(event) {
   const modalImage = document.createElement("img");
   modalImage.src = imageUrl;
 
+  const closeButton = document.createElement("button");
+  closeButton.innerHTML = "X";
+  closeButton.classList.add("close-button");
+
+  modalContent.appendChild(closeButton);
   modalContent.appendChild(modalImage);
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
 
+  setTimeout(() => {
+    modal.classList.add("show");
+  }, 100);
+
   modal.addEventListener("click", closeModal);
+  closeButton.addEventListener("click", function (event) {
+    event.stopPropagation(); // Zastaví šíření události
+    closeModal(event);
+  });
 }
 
 function closeModal(event) {
-  if (event.target.classList.contains("modal")) {
-    event.target.remove();
+  if (
+    event.target.classList.contains("modal") ||
+    event.target.classList.contains("close-button")
+  ) {
+    const modal = event.target.classList.contains("modal")
+      ? event.target
+      : event.target.parentElement.parentElement;
+    modal.classList.remove("show");
+    modal.classList.add("hide");
+
+    modal.addEventListener("transitionend", () => {
+      modal.remove();
+    });
   }
 }
