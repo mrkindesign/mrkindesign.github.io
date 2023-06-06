@@ -3,7 +3,7 @@ const CANVAS_WIDTH = 1920;
 const CANVAS_HEIGHT = 1080;
 
 const canvases = document.querySelectorAll("canvas");
-const frameCount = 28;
+const frameCount = 21;
 
 const currentFrame = (index, folder) =>
   `./${folder}/${index.toString().padStart(4, "0")}.jpg`;
@@ -226,4 +226,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     total.value = "CZK 0";
   });
+});
+
+// Získání tlačítka "Otevřít" a modálního okna
+const openModalBtn = document.querySelector(".open-modal-btn");
+const modal = document.querySelector(".services.modal");
+
+// Přidání posluchače události na kliknutí na tlačítko "Otevřít"
+openModalBtn.addEventListener("click", () => {
+  modal.classList.add("open");
+});
+
+// Získání tlačítka pro zavření modálního okna
+const closeModalBtn = modal.querySelector(".close-modal-btn");
+
+// Přidání posluchače události na kliknutí na tlačítko pro zavření
+closeModalBtn.addEventListener("click", () => {
+  modal.classList.remove("open");
+});
+
+// Přidání posluchače události na kliknutí na celý dokument
+document.addEventListener("click", (event) => {
+  // Zkontrolujte, zda kliknutí bylo mimo modální okno
+  if (!modal.contains(event.target) && !openModalBtn.contains(event.target)) {
+    modal.classList.remove("open");
+  }
 });

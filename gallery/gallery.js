@@ -7,7 +7,6 @@ fetch("photos.json")
       const imageElement = document.createElement("img");
       imageElement.src = photo.url;
       imageElement.alt = photo.title;
-      imageElement.addEventListener("click", openModal);
       gallery.appendChild(imageElement);
     });
   })
@@ -16,6 +15,10 @@ fetch("photos.json")
   });
 
 function openModal(event) {
+  if (window.innerWidth <= 600) {
+    return; // Pokud je šířka okna menší nebo rovna 600px, neprovádí se žádná akce
+  }
+
   const imageUrl = event.target.src;
 
   const modal = document.createElement("div");
@@ -63,3 +66,8 @@ function closeModal(event) {
     });
   }
 }
+
+// Přidání posluchačů událostí na kliknutí na obrázky v galerii
+gallery.addEventListener("click", (event) => {
+  openModal(event);
+});

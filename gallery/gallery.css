@@ -64,27 +64,6 @@ body {
   margin: 0 auto;
 }
 
-@media (hover: hover) {
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (max-width: 1200px) {
-}
-
-@media only screen and (max-width: 1050px) {
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (max-width: 650px) {
-  .Header_Logo {
-    width: 45vw;
-  }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (max-width: 400px) {
-}
-
 .container {
   /* background-color: rgb(255, 255, 255); */
   max-width: 1500px;
@@ -161,8 +140,8 @@ h1 {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
-  height: auto;
+  width: auto;
+  height: 80vh;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -196,18 +175,50 @@ h1 {
   transform-origin: center;
 }
 
-/* @media only screen and (min-width: 2000px) {
-  .modal img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    height: 80vh;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+@media (hover: hover) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 2000px) {
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1400px) {
+}
+
+@media only screen and (max-width: 1050px) {
+  .Header_Logo {
+    width: 50vw;
+    margin: 0 auto;
   }
-} */
+
+  .gallery {
+    column-count: 1;
+    column-gap: 20px;
+  }
+
+  .container {
+    max-width: 800px;
+    padding: 0 30px;
+  }
+  .container::first-letter {
+    font-size: 50px;
+  }
+
+  h1 {
+    color: #ffffff;
+    padding-top: 80px;
+    padding-bottom: 50px;
+    font-size: 25px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 650px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 400px) {
+}
 
 @keyframes blob-turn {
   0% {
