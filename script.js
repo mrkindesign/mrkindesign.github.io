@@ -228,13 +228,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Získání tlačítka "Otevřít" a modálního okna
 const openModalBtn = document.querySelector(".open-modal-btn");
 const modal = document.querySelector(".services.modal");
 
 // Přidání posluchače události na kliknutí na tlačítko "Otevřít"
 openModalBtn.addEventListener("click", () => {
   modal.classList.add("open");
+  document.body.style.overflow = "hidden"; // Zakáže rolování stránky
 });
 
 // Získání tlačítka pro zavření modálního okna
@@ -243,6 +243,7 @@ const closeModalBtn = modal.querySelector(".close-modal-btn");
 // Přidání posluchače události na kliknutí na tlačítko pro zavření
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("open");
+  document.body.style.overflow = "auto"; // Povolí rolování stránky
 });
 
 // Přidání posluchače události na kliknutí na celý dokument
@@ -250,5 +251,6 @@ document.addEventListener("click", (event) => {
   // Zkontrolujte, zda kliknutí bylo mimo modální okno
   if (!modal.contains(event.target) && !openModalBtn.contains(event.target)) {
     modal.classList.remove("open");
+    document.body.style.overflow = "auto"; // Povolí rolování stránky
   }
 });
