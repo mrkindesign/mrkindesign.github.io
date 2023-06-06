@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Poiret+One&family=Raleway:wght@300&display=swap%27");
 
 :root {
   --main-color: #14a83c;
@@ -15,8 +17,8 @@
 }
 
 body {
-  background-color: #064e18;
   background-color: var(--background-color);
+  font-family: "Roboto", sans-serif;
 }
 
 .background {
@@ -39,6 +41,48 @@ body {
 .background:nth-child(2) svg {
   width: 100vw;
   height: 200vh;
+}
+
+.Header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+
+  background: rgba(255, 255, 255, 0.199);
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.3px);
+  -webkit-backdrop-filter: blur(6.3px);
+
+  z-index: 9999;
+  font-weight: 300;
+  transition: all 500ms ease-in-out;
+}
+
+.Header_Logo {
+  width: 10vw;
+  margin: 0 auto;
+}
+
+@media (hover: hover) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1200px) {
+}
+
+@media only screen and (max-width: 1050px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 650px) {
+  .Header_Logo {
+    width: 45vw;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 400px) {
 }
 
 .container {
@@ -125,9 +169,9 @@ h1 {
 
 .close-button {
   position: absolute;
-  z-index: 20;
-  top: 50px;
-  right: 50px;
+  z-index: 120;
+  top: 150px;
+  right: 150px;
   background: none;
   border: none;
   color: white;
@@ -151,6 +195,19 @@ h1 {
   animation: blob-scale calc(var(--time, 30s) * 0.5) ease-in-out 0s infinite;
   transform-origin: center;
 }
+
+/* @media only screen and (min-width: 2000px) {
+  .modal img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+} */
 
 @keyframes blob-turn {
   0% {

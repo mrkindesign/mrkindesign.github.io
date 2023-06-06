@@ -3,30 +3,31 @@ const CANVAS_WIDTH = 1920;
 const CANVAS_HEIGHT = 1080;
 
 const canvases = document.querySelectorAll("canvas");
-const copy = document.getElementById("copyExample");
-
-const frameCount = 50;
+const frameCount = 28;
 
 const currentFrame = (index, folder) =>
   `./${folder}/${index.toString().padStart(4, "0")}.jpg`;
 
 // Nová funkce pro načítání obrázku
-const loadImage = (src, callback) => {
-  const img = new Image();
-  img.onload = function () {
-    callback(img);
-  };
-  img.src = src;
+const loadImage = (src) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = function () {
+      resolve(img);
+    };
+    img.onerror = reject;
+    img.src = src;
+  });
 };
 
-const setupCanvas = (canvas, folder) => {
+const setupCanvas = async (canvas, folder) => {
   const context = canvas.getContext("2d");
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
 
-  loadImage(currentFrame(1, folder), function (img) {
-    context.drawImage(img, 0, 0);
-  });
+  const img = await loadImage(currentFrame(1, folder));
+  context.drawImage(img, 0, 0);
+
   return { context };
 };
 
@@ -38,15 +39,14 @@ const canvasInfo = [
 
 const imageCache = {};
 
-const updateImage = (context, index, folder) => {
+const updateImage = async (context, index, folder) => {
   const src = currentFrame(index, folder);
   if (imageCache[src]) {
     context.drawImage(imageCache[src], 0, 0);
   } else {
-    loadImage(src, function (img) {
-      imageCache[src] = img;
-      context.drawImage(img, 0, 0);
-    });
+    const img = await loadImage(src);
+    imageCache[src] = img;
+    context.drawImage(img, 0, 0);
   }
 };
 
@@ -60,13 +60,13 @@ const lerp = (start, end, t) => {
   return start * (1 - t) + end * t;
 };
 
-const updateScroll = (scrollTop) => {
+const updateScroll = async (scrollTop) => {
   if (Math.abs(scrollTop - lastScrollTop) < 50) {
     ticking = false;
     return;
   }
   lastScrollTop = scrollTop;
-  sections.forEach((section, index) => {
+  for (const [index, section] of sections.entries()) {
     const rect = section.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       const scrollFraction =
@@ -77,23 +77,23 @@ const updateScroll = (scrollTop) => {
         Math.floor(scrollFraction * frameCount)
       );
 
-      const { context } = canvasInfo[index];
+      const { context } = await canvasInfo[index];
       const currentFrameIndex = index; // index je zde nahrazen aktuálním indexem snímku
 
       const frameIndex = Math.floor(
-        lerp(currentFrameIndex, targetFrameIndex, 0.9)
+        lerp(currentFrameIndex, targetFrameIndex, 0.6)
       );
 
-      updateImage(context, frameIndex + 1, `img${index + 1}`);
+      await updateImage(context, frameIndex + 1, `img${index + 1}`);
     }
-  });
+  }
   ticking = false;
 };
 
 window.addEventListener("scroll", () => {
   if (!ticking) {
-    window.requestAnimationFrame(() => {
-      updateScroll(window.pageYOffset);
+    window.requestAnimationFrame(async () => {
+      await updateScroll(window.pageYOffset);
     });
     ticking = true;
   }
