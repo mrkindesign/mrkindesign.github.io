@@ -181,6 +181,7 @@ btnRight.addEventListener("click", moveRight);
 window.addEventListener("resize", moveSlider);
 
 // Event Listenerssadfaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff:
+
 document.addEventListener("DOMContentLoaded", function () {
   var quantities = Array.from(document.querySelectorAll(".quantity"));
   var prices = Array.from(document.querySelectorAll(".prices"));
@@ -195,11 +196,15 @@ document.addEventListener("DOMContentLoaded", function () {
         subtotals[i].value = quantities[i].value * prices[i].value;
       } else {
         quantities[i].disabled = true;
-        subtotals[i].value = 0;
       }
 
-      var sum = subtotals.reduce(function (acc, curr) {
-        return acc + parseInt(curr.value);
+      // Vypočítání celkové hodnoty
+      var sum = subtotals.reduce(function (acc, curr, index) {
+        if (checkboxes[index].checked) {
+          return acc + parseInt(curr.value);
+        } else {
+          return acc;
+        }
       }, 0);
 
       total.value = "CZK " + sum;
@@ -208,8 +213,14 @@ document.addEventListener("DOMContentLoaded", function () {
     quantities[i].addEventListener("input", function () {
       if (checkboxes[i].checked) {
         subtotals[i].value = this.value * prices[i].value;
-        var sum = subtotals.reduce(function (acc, curr) {
-          return acc + parseInt(curr.value);
+
+        // Vypočítání celkové hodnoty
+        var sum = subtotals.reduce(function (acc, curr, index) {
+          if (checkboxes[index].checked) {
+            return acc + parseInt(curr.value);
+          } else {
+            return acc;
+          }
         }, 0);
 
         total.value = "CZK " + sum;
@@ -218,13 +229,66 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.querySelector(".reset-btn").addEventListener("click", function () {
-    quantities.forEach(function (quantity) {
+    quantities.forEach(function (quantity, i) {
       quantity.disabled = true;
     });
     subtotals.forEach(function (subtotal) {
       subtotal.value = 0;
     });
     total.value = "CZK 0";
+  });
+
+  // Event Listener pro tlačítka plus
+  const plusButtons = document.querySelectorAll(".quantity-btn.plus-btn");
+  plusButtons.forEach(function (button, i) {
+    button.addEventListener("click", function (event) {
+      event.preventDefault(); // Zastaví výchozí událost (default event)
+      const quantityInput = this.parentNode.querySelector(".quantity");
+      quantityInput.value = parseInt(quantityInput.value) + 1;
+      checkboxes[i].checked = false; // Zrušit zaškrtnutí checkboxu
+
+      // Aktualizovat subtotal
+      subtotals[i].value = quantityInput.value * prices[i].value;
+
+      // Vypočítání celkové hodnoty
+      var sum = subtotals.reduce(function (acc, curr, index) {
+        if (checkboxes[index].checked) {
+          return acc + parseInt(curr.value);
+        } else {
+          return acc;
+        }
+      }, 0);
+
+      total.value = "CZK " + sum;
+    });
+  });
+
+  // Event Listener pro tlačítka minus
+  const minusButtons = document.querySelectorAll(".quantity-btn.minus-btn");
+  minusButtons.forEach(function (button, i) {
+    button.addEventListener("click", function (event) {
+      event.preventDefault(); // Zastaví výchozí událost (default event)
+      const quantityInput = this.parentNode.querySelector(".quantity");
+      const currentValue = parseInt(quantityInput.value);
+      if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
+        checkboxes[i].checked = false; // Zrušit zaškrtnutí checkboxu
+
+        // Aktualizovat subtotal
+        subtotals[i].value = quantityInput.value * prices[i].value;
+
+        // Vypočítání celkové hodnoty
+        var sum = subtotals.reduce(function (acc, curr, index) {
+          if (checkboxes[index].checked) {
+            return acc + parseInt(curr.value);
+          } else {
+            return acc;
+          }
+        }, 0);
+
+        total.value = "CZK " + sum;
+      }
+    });
   });
 });
 
@@ -244,13 +308,4 @@ const closeModalBtn = modal.querySelector(".close-modal-btn");
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("open");
   document.body.style.overflow = "auto"; // Povolí rolování stránky
-});
-
-// Přidání posluchače události na kliknutí na celý dokument
-document.addEventListener("click", (event) => {
-  // Zkontrolujte, zda kliknutí bylo mimo modální okno
-  if (!modal.contains(event.target) && !openModalBtn.contains(event.target)) {
-    modal.classList.remove("open");
-    document.body.style.overflow = "auto"; // Povolí rolování stránky
-  }
 });
