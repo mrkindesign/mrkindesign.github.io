@@ -3,7 +3,7 @@ const CANVAS_WIDTH = 1920;
 const CANVAS_HEIGHT = 1080;
 
 const canvases = document.querySelectorAll("canvas");
-const frameCount = 21;
+const frameCount = 18;
 
 const currentFrame = (index, folder) =>
   `./${folder}/${index.toString().padStart(4, "0")}.jpg`;
@@ -68,7 +68,9 @@ const updateScroll = async (scrollTop) => {
   lastScrollTop = scrollTop;
   for (const [index, section] of sections.entries()) {
     const rect = section.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (isVisible) {
       const scrollFraction =
         (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
 
@@ -81,7 +83,7 @@ const updateScroll = async (scrollTop) => {
       const currentFrameIndex = index; // index je zde nahrazen aktuálním indexem snímku
 
       const frameIndex = Math.floor(
-        lerp(currentFrameIndex, targetFrameIndex, 0.6)
+        lerp(currentFrameIndex, targetFrameIndex, 1)
       );
 
       await updateImage(context, frameIndex + 1, `img${index + 1}`);
