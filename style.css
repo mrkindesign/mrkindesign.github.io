@@ -182,6 +182,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
+  overflow-x: hidden;
 }
 
 .MainPageImg {
@@ -365,8 +366,8 @@ body {
 
   .MainPageImg {
 
-    width: auto;
-    height: 200vw;
+    width: 100vw;
+    height: auto;
 
   }
 
