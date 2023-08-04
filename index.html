@@ -19,31 +19,38 @@
   <title>LESENIBUKACEK</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
   <!--FONT AWESOME-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="https://threejs.org/examples/js/libs/stats.min.js"></script> -->
-
-
+  <!--AOS-->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
 </head>
 
 <body>
 
+  <section>
+    <div id="cookie-banner" class="cookie-banner">
+      <p>Tato stránka používá soubory cookie pro zlepšení uživatelského zážitku. <a
+          href="./cookie/politika-cookies.html">Zjistěte
+          více</a></p>
+      <button id="accept-cookies">Souhlasím</button>
+    </div>
+  </section>
+
   <header>
     <div class="Header" id="navbar">
-      <div class="Header_Logo">
+      <div class="Header_Logo" data-aos="fade-down" data-aos-duration="1500">
         <a href="#"> <img src="./img/leseni-bukacek-logo-sirkove-rgb.svg" alt="BukacekLogo" /></a>
       </div>
 
-      <div class="Header_Nav">
+      <div class="Header_Nav" data-aos="fade-down" data-aos-duration="1500">
         <ul>
           <li><a href="#">DOMŮ</a></li>
-          <li><a href="#carousel">NAŠE LEŠENÍ</a></li>
           <li><a href="#hwdi">JAK TO FUNGUJE</a></li>
+          <li><a href="./gallery/gallery.html">GALERIE</a></li>
           <li><a href="#contact">KONTAKT</a></li>
         </ul>
       </div>
@@ -54,22 +61,19 @@
     <section>
       <img src="./img/MainPageImg.jpg" class="MainPageImg" alt="">
       <div class="info_wrapper">
-        <div class="info_wrapper_text">
+        <div class="info_wrapper_text" data-aos="fade-in" data-aos-duration="1500">
           <h2>Lešení <br> Bukáček</h2>
           <p>
             Vítejte na našich webových stránkách, kde Vám rádi představíme
             naše služby půjčování lešení pro Vaše stavební a rekonstrukční
             potřeby. Jsme společnost, která má bohaté zkušenosti s
             poskytováním kvalitního a bezpečného lešení pro různé typy staveb.
-            Naše firma je spolehlivým partnerem pro mnoho stavebních firem,
-            ale i pro jednotlivé zákazníky. Pokud potřebujete půjčit lešení na
-            delší dobu, nabízíme Vám možnost pronájmu na měsíční bázi za
-            bezkonkurenční ceny!
+
           </p>
         </div>
 
 
-        <div class="CTA_scroll"> <a href="#carousel">
+        <div class="CTA_scroll"> <a href="#hwdi">
             <img src="./img/CTA_button.png" alt="Image 2" class="image" /> </a>
           <p>↓</p>
         </div>
@@ -81,14 +85,75 @@
 
 
 
-    <section >
+
+
+
+    <section>
+      <div class="canvas-section-wrap" id="hwdi">
+
+        <div class="canvas-section-block">
+          <div class="canvas-section">
+            <canvas class="sticky-canvas" id="scrollAnimation1"></canvas>
+            <div class="canvas-text-wrapper">
+              <div class="canvas-text" id="canvas-text1" data-aos="fade-in">
+                <h3>DOPRAVA</h3>
+                <p>
+                  Nabízíme <span style=" font-weight: 600; color: #0f6b2c;">dopravu lešení</span> na
+                  místo určení jako
+                  součást našich
+                  služeb.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="canvas-section-block">
+          <div class="canvas-section">
+            <canvas class="sticky-canvas" id="scrollAnimation2"></canvas>
+            <div class="canvas-text-wrapper">
+              <div class="canvas-text" id="canvas-text2" data-aos="fade-in">
+                <h3>SESTAVENÍ</h3>
+                <p>
+                  <span style=" font-weight: 600; color: #0f6b2c;">Bezproblémová a včasná
+                    realizace</span> stavebních či rekonstrukčních prací.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="canvas-section-block">
+          <div class="canvas-section">
+            <canvas class="sticky-canvas" id="scrollAnimation3"></canvas>
+            <div class="canvas-text-wrapper">
+              <div class="canvas-text" id="canvas-text3" data-aos="fade-in">
+                <h3>LEŠENÍ</h3>
+                <p>
+                  Naše lešen zaručuje maximální bezpečnost a <span style=" font-weight: 600; color: #0f6b2c;">splňuje
+                    nejvyšší kvalitativní standardy</span>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="spacer"></div> -->
+
+    </section>
+
+
+    <section id="carousel" data-aos="fade-up">
       <div class="carousel_background">
         <img src="./img/ScaffoldIcon.png" alt="">
         <img src="./img/ScaffoldIcon.png" alt="">
-        <img src="./img/ScaffoldIcon.png" alt="">
-        <img src="./img/ScaffoldIcon.png" alt="">
       </div>
-      <div class="carousel" id="carousel">
+
+      <div class="carousel">
         <div class="carousel__nav">
           <span id="moveLeft" class="carousel__arrow">
             <svg class="carousel__icon" width="24" height="24" viewBox="0 0 24 24">
@@ -147,219 +212,51 @@
         </div>
     </section>
 
-
-    <section>
-      <div class="canvas-section-wrap" id="hwdi">
-
-        <div class="canvas-section-block">
-          <div class="canvas-section">
-            <canvas class="sticky-canvas" id="scrollAnimation1"></canvas>
-            <div class="canvas-text-wrapper">
-              <div class="canvas-text" id="canvas-text1">
-                <h3>DOPRAVA</h3>
-                <p>
-                  Nabízíme dopravu lešení na místo určení jako součást našich služeb.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="spacer"></div>
-
-        <div class="canvas-section-block">
-          <div class="canvas-section">
-            <canvas class="sticky-canvas" id="scrollAnimation2"></canvas>
-            <div class="canvas-text-wrapper">
-              <div class="canvas-text" id="canvas-text2">
-                <h3>SESTAVENÍ</h3>
-                <p>
-                  Naše odborná parta pro sestavování lešení zaručuje správné a bezpečné sestavení v souladu s normami,
-                  minimalizaci stresu a bezproblémovou a včasnou realizaci stavebních či rekonstrukčních prací.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="spacer"></div>
-
-        <div class="canvas-section-block">
-          <div class="canvas-section">
-            <canvas class="sticky-canvas" id="scrollAnimation3"></canvas>
-            <div class="canvas-text-wrapper">
-              <div class="canvas-text" id="canvas-text3">
-                <h3>LEŠENÍ</h3>
-                <p>
-                  Naše lešení, vyráběné z prvotřídních materiálů je pravidelně kontrolované našimi odborníky, zaručuje
-                  maximální bezpečnost a splňuje nejvyšší kvalitativní standardy.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <!-- <div class="spacer"></div> -->
-
-    </section>
-
-
-
-    <section>
+    <section id="scaffolding-container">
 
       <div class="scaffolding-container">
 
 
         <div class="scaffolding-item">
           <img src="./img/Scaffold_side_view.jpg" alt="Druh 1 lešení" class="scaffolding-image">
-          <h2>Druh 1 lešení</h2>
-          <p>Velikost: xxx m</p>
-          <p>Použití: Popis, kde je tento druh lešení obvykle používán.</p>
+          <h2>Fasádní lešení UNI 70/100</h2>
+          <p>
+            <i class="fa fa-arrows-h"></i> Délka lešení: <strong>3,0 m</strong> – libovolná, konfigurovaná z polí o
+            délkách
+          </p>
+          <p><i class="fa fa-arrows-v"></i> Výška rámu: <strong>2,0 m</strong></p>
+          <p>
+            <i class="fa fa-arrows"></i> Šířka lešení: <strong>1,10 m</strong>
+          </p>
         </div>
-        <div class="scaffolding-item">
-          <img src="./img/Scaffold_front_view.jpg" alt="Druh 1 lešení" class="scaffolding-image">
-          <h2>Druh 1 lešení</h2>
-          <p>Velikost: xxx m</p>
-          <p>Použití: Popis, kde je tento druh lešení obvykle používán.</p>
-        </div>
-        <div class="scaffolding-item">
-          <img src="./img/Scaffold_side_view.jpg" alt="Druh 1 lešení" class="scaffolding-image">
-          <h2>Druh 1 lešení</h2>
-          <p>Velikost: xxx m</p>
-          <p>Použití: Popis, kde je tento druh lešení obvykle používán.</p>
-        </div>
-        <div class="scaffolding-item">
-          <img src="./img/Scaffold_front_view.jpg" alt="Druh 1 lešení" class="scaffolding-image">
-          <h2>Druh 1 lešení</h2>
-          <p>Velikost: xxx m</p>
-          <p>Použití: Popis, kde je tento druh lešení obvykle používán.</p>
-        </div>
-        <div class="scaffolding-item">
-          <img src="./img/Scaffold_front_view.jpg" alt="Druh 1 lešení" class="scaffolding-image">
-          <h2>Druh 1 lešení</h2>
-          <p>Velikost: xxx m</p>
-          <p>Použití: Popis, kde je tento druh lešení obvykle používán.</p>
-        </div>
+
         <!-- Ostatní druhy lešení -->
+      </div>
+
+      <div class="services">
+        <h2>Kalkulačka nákladů na lešení</h2>
+
+        <p>Zadejte počet metrů čtverečních:</p>
+        <input type="number" id="squareMeters" name="squareMeters" min="1">
+
+        <button onclick="calculate()">Vypočítat</button>
+
+        <p id="error">Zadejte prosím platný počet metrů čtverečních.</p>
+        <p id="result"></p>
+
       </div>
 
     </section>
 
-<section id="services">
-  <div class="open-modal-btn-container">
-    <button class="open-modal-btn">-Vypočítat si cenu-</button>
-  </div>
-  <div class="services modal">
-    <form>
-      <table id="price-calc">
-        <thead>
-          <tr>
-            <th>Produkt</th>
-            <th>Počet</th>
-            <th>Cena <br> (za den)</th>
-            <th>Přidat</th>
-            <th>Celkem</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Produkt 1</td>
-            <td>
-              <div class="quantity-container">
-                <button class="quantity-btn minus-btn">-</button>
-                <input type="number" min="1" max="20" value="1" name="quantity" class="quantity">
-                <button class="quantity-btn plus-btn">+</button>
-              </div>
-            </td>
-            <td><input type="text" class="prices" value="50" name="prices" readonly></td>
-            <td><input type="checkbox" class="check-box"></td>
-            <td><input type="text" class="subtotal" value="0" name="subtotal" readonly></td>
-          </tr>
-          <tr>
-            <td>Produkt 2</td>
-            <td>
-              <div class="quantity-container">
-                <button class="quantity-btn minus-btn">-</button>
-                <input type="number" min="1" max="20" value="1" name="quantity" class="quantity">
-                <button class="quantity-btn plus-btn">+</button>
-              </div>
-            </td>
-            <td><input type="text" class="prices" value="50" name="prices" readonly></td>
-            <td><input type="checkbox" class="check-box"></td>
-            <td><input type="text" class="subtotal" value="0" name="subtotal" readonly></td>
-          </tr>
-          <tr>
-            <td>Produkt 3</td>
-            <td>
-              <div class="quantity-container">
-                <button class="quantity-btn minus-btn">-</button>
-                <input type="number" min="1" max="20" value="1" name="quantity" class="quantity">
-                <button class="quantity-btn plus-btn">+</button>
-              </div>
-            </td>
-            <td><input type="text" class="prices" value="50" name="prices" readonly></td>
-            <td><input type="checkbox" class="check-box"></td>
-            <td><input type="text" class="subtotal" value="0" name="subtotal" readonly></td>
-          </tr>
-          <tr>
-            <td>Produkt 4</td>
-            <td>
-              <div class="quantity-container">
-                <button class="quantity-btn minus-btn">-</button>
-                <input type="number" min="1" max="20" value="1" name="quantity" class="quantity">
-                <button class="quantity-btn plus-btn">+</button>
-              </div>
-            </td>
-            <td><input type="text" class="prices" value="50" name="prices" readonly></td>
-            <td><input type="checkbox" class="check-box"></td>
-            <td><input type="text" class="subtotal" value="0" name="subtotal" readonly></td>
-          </tr>
-          <tr>
-            <td>Produkt 5</td>
-            <td>
-              <div class="quantity-container">
-                <button class="quantity-btn minus-btn">-</button>
-                <input type="number" min="1" max="20" value="1" name="quantity" class="quantity">
-                <button class="quantity-btn plus-btn">+</button>
-              </div>
-            </td>
-            <td><input type="text" class="prices" value="50" name="prices" readonly></td>
-            <td><input type="checkbox" class="check-box"></td>
-            <td><input type="text" class="subtotal" value="0" name="subtotal" readonly></td>
-          </tr>
-          <!-- Další produkty -->
-        </tbody>
-        <tfoot>
-          <tr>
-            <th colspan="4"> <p>Cena zapůjčení lešení na den -></p> </th>
-            <th><input type="text" class="sum-total" value="CZK 0" name="" readonly /></th>
-          </tr>
-          <tr>
-            <th colspan="5" class="text-center"><input class="reset-btn" type="reset" value="Vymazat data"></th>
-          </tr>
-        </tfoot>
-      </table>
-    </form>
-    <button class="close-modal-btn">X</button>
-  </div>
-</section>
 
 
-    <!-- <section>
-        <div class="content">
-          <h2>Additional Content</h2>
-          <p>
-            This is an example of additional content after the scroll animations
-            and spacers. You can add any type of content here, like text,
-            images, or videos.
-          </p>
-        </div>
-      </section> -->
 
 
-    <section >
-      <div class="contact_wrap" >
+    <section>
+      <div class="contact_wrap">
         <div class="contact_container" id="contact">
+
+
 
           <div class="contact_owner">
             <div class="photo_container">
@@ -391,10 +288,38 @@
 
 
 
-    <section>
+    <section id="form-container">
+
+      <div class="form_background">
+
+
+        <img src="./img/Form_background.png" alt="Form_background">
+      </div>
+
+      <h3>Rádi vám s čímkoli poradíme...</h3>
+
+      <div class="form-container">
+        <img src="./img/ScaffoldIcon.png" alt="" class="form-container-bg">
+        <form action="./server/send-email.php" method="post" onsubmit="return validateForm()">
+          <label for="jmeno">Jméno a Příjmení:</label>
+          <input type="text" id="jmeno" name="jmeno" pattern="[A-Za-zÀ-ž\s]+" required>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
+          <label for="message">Zpráva:</label>
+          <textarea id="message" name="message"
+            placeholder="např.: Přál bych si 5kusů lešení na dobu 3 dnů. Můj telefon +420 987 654 321."></textarea>
+          <button type="submit">Odeslat</button>
+        </form>
+
+      </div>
+
+
+    </section>
+
+    <section id="testimonials">
       <div class="testimonials">
         <h2 class="title">slova od našich zákazníků</h2>
-        <p class="description">od roku 2015 pomáháme při stavbách dosahovat nejlepších výsledků.</p>
+        <p class="description">Od roku 2015 pomáháme při stavbách dosahovat nejlepších výsledků.</p>
 
         <div class="slider-container">
           <div class="slider">
@@ -405,7 +330,7 @@
                 rychlé dodání a především kvalitní a bezpečné lešení. Rád se k nim vrátím při příštích projektech.
               </p>
               <img
-                src="/img/testamonials/middesign_Generate_a_profile_picture_of_a_construction_entrepre_dcfb68f9-4e44-4c9f-8808-aa42ba82b7c2.png" />
+                src="./img/testamonials/middesign_Generate_a_profile_picture_of_a_construction_entrepre_dcfb68f9-4e44-4c9f-8808-aa42ba82b7c2.png" />
               <h3 class="name">Jan K.</h3>
               <h4 class="job">Stavební podnikatel</h4>
             </div>
@@ -447,6 +372,12 @@
 
 
 
+
+
+
+
+
+
   </main>
 
   <footer>
@@ -462,13 +393,14 @@
         <ul>
           <li><a href="#contact">Kontaktujte nás</a></li>
           <li><a href="#hwdi">Naše služby</a></li>
-          <li><a href="https://policies.google.com/technologies/partner-sites?hl=cs">Zásady ochrany osobních údajů</a></li>
+          <li><a href="https://policies.google.com/technologies/partner-sites?hl=cs">Zásady ochrany osobních údajů</a>
+          </li>
           <li><a href="./documents/VOP.html">Všeobecné obchodní podmínky</a></li>
         </ul>
       </div>
 
       <div class="row">
-        LESENIBUKACEK Copyright © 2023 - All rights reserved || Designed By: Mrk-in
+        LESENI-BUKACEK Copyright © 2023 - All rights reserved || Designed By: Mrk-in
       </div>
     </div>
   </footer>
@@ -486,8 +418,10 @@
 
   </div>
 
-
-
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 
 </html>

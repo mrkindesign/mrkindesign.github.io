@@ -3,7 +3,7 @@ const CANVAS_WIDTH = 1920;
 const CANVAS_HEIGHT = 1080;
 
 const canvases = document.querySelectorAll("canvas");
-const frameCount = 18;
+const frameCount = 50;
 
 const currentFrame = (index, folder) =>
   `./${folder}/${index.toString().padStart(4, "0")}.jpg`;
@@ -52,7 +52,6 @@ const updateImage = async (context, index, folder) => {
 
 const sections = document.querySelectorAll(".canvas-section");
 
-let lastScrollTop = 0;
 let ticking = false;
 
 // Přidaná funkce pro lineární interpolaci
@@ -60,12 +59,7 @@ const lerp = (start, end, t) => {
   return start * (1 - t) + end * t;
 };
 
-const updateScroll = async (scrollTop) => {
-  if (Math.abs(scrollTop - lastScrollTop) < 50) {
-    ticking = false;
-    return;
-  }
-  lastScrollTop = scrollTop;
+const updateScroll = async () => {
   for (const [index, section] of sections.entries()) {
     const rect = section.getBoundingClientRect();
     const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
@@ -92,14 +86,16 @@ const updateScroll = async (scrollTop) => {
   ticking = false;
 };
 
-window.addEventListener("scroll", () => {
+const handleScroll = () => {
   if (!ticking) {
-    window.requestAnimationFrame(async () => {
-      await updateScroll(window.pageYOffset);
-    });
+    window.requestAnimationFrame(updateScroll);
     ticking = true;
   }
-});
+};
+
+window.addEventListener("scroll", handleScroll);
+window.addEventListener("resize", handleScroll);
+handleScroll();
 
 // Navbar vytáhnutí nahoru
 
@@ -183,131 +179,68 @@ btnRight.addEventListener("click", moveRight);
 window.addEventListener("resize", moveSlider);
 
 // Event Listenerssadfaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff:
+function calculate() {
+  var squareMeters = document.getElementById("squareMeters").value;
+  var errorElement = document.getElementById("error");
+  var resultElement = document.getElementById("result");
 
-document.addEventListener("DOMContentLoaded", function () {
-  var quantities = Array.from(document.querySelectorAll(".quantity"));
-  var prices = Array.from(document.querySelectorAll(".prices"));
-  var checkboxes = Array.from(document.querySelectorAll(".check-box"));
-  var subtotals = Array.from(document.querySelectorAll(".subtotal"));
-  var total = document.querySelector(".sum-total");
+  if (squareMeters < 1) {
+    errorElement.style.display = "block";
+    resultElement.style.display = "none";
+    return;
+  }
 
-  checkboxes.forEach(function (checkbox, i) {
-    checkbox.addEventListener("change", function () {
-      if (this.checked) {
-        quantities[i].disabled = false;
-        subtotals[i].value = quantities[i].value * prices[i].value;
-      } else {
-        quantities[i].disabled = true;
-      }
+  errorElement.style.display = "none";
+  resultElement.style.display = "block"; // Tento řádek zobrazí výsledkový element
 
-      // Vypočítání celkové hodnoty
-      var sum = subtotals.reduce(function (acc, curr, index) {
-        if (checkboxes[index].checked) {
-          return acc + parseInt(curr.value);
-        } else {
-          return acc;
-        }
-      }, 0);
+  var pricePerDay = 10;
+  var daysInMonth = 30;
+  var result = squareMeters * pricePerDay * daysInMonth;
 
-      total.value = "CZK " + sum;
-    });
+  resultElement.innerHTML =
+    "Odhadovaná cena za měsíc (montáž, pronájem, demontáž): " + result + " Kč";
+  resultElement.classList.add("show", "calculation");
+}
 
-    quantities[i].addEventListener("input", function () {
-      if (checkboxes[i].checked) {
-        subtotals[i].value = this.value * prices[i].value;
+//jméno a příjmení v contactformu
 
-        // Vypočítání celkové hodnoty
-        var sum = subtotals.reduce(function (acc, curr, index) {
-          if (checkboxes[index].checked) {
-            return acc + parseInt(curr.value);
-          } else {
-            return acc;
-          }
-        }, 0);
+function validateForm() {
+  var jmenoInput = document.getElementById("jmeno");
+  var jmenoValue = jmenoInput.value.trim();
+  var jmenoArray = jmenoValue.split(" ");
 
-        total.value = "CZK " + sum;
-      }
-    });
-  });
+  if (jmenoArray.length < 2) {
+    alert("Prosím, zadejte jak jméno, tak příjmení.");
+    return false;
+  }
 
-  document.querySelector(".reset-btn").addEventListener("click", function () {
-    quantities.forEach(function (quantity, i) {
-      quantity.disabled = true;
-    });
-    subtotals.forEach(function (subtotal) {
-      subtotal.value = 0;
-    });
-    total.value = "CZK 0";
-  });
+  return true;
+}
 
-  // Event Listener pro tlačítka plus
-  const plusButtons = document.querySelectorAll(".quantity-btn.plus-btn");
-  plusButtons.forEach(function (button, i) {
-    button.addEventListener("click", function (event) {
-      event.preventDefault(); // Zastaví výchozí událost (default event)
-      const quantityInput = this.parentNode.querySelector(".quantity");
-      quantityInput.value = parseInt(quantityInput.value) + 1;
-      checkboxes[i].checked = false; // Zrušit zaškrtnutí checkboxu
+//cookies
+window.onload = function () {
+  var acceptButton = document.getElementById("accept-cookies");
+  var banner = document.getElementById("cookie-banner");
 
-      // Aktualizovat subtotal
-      subtotals[i].value = quantityInput.value * prices[i].value;
+  if (!localStorage.getItem("cookiesAccepted")) {
+    banner.style.display = "flex";
+  }
 
-      // Vypočítání celkové hodnoty
-      var sum = subtotals.reduce(function (acc, curr, index) {
-        if (checkboxes[index].checked) {
-          return acc + parseInt(curr.value);
-        } else {
-          return acc;
-        }
-      }, 0);
+  acceptButton.onclick = function () {
+    localStorage.setItem("cookiesAccepted", "true");
+    banner.style.display = "none";
+  };
+};
 
-      total.value = "CZK " + sum;
-    });
-  });
+//////////////////////////////////////////////////////////////
+// Získáme odkaz na obrázek
+const imgElement = document.querySelector(".MainPageImg");
 
-  // Event Listener pro tlačítka minus
-  const minusButtons = document.querySelectorAll(".quantity-btn.minus-btn");
-  minusButtons.forEach(function (button, i) {
-    button.addEventListener("click", function (event) {
-      event.preventDefault(); // Zastaví výchozí událost (default event)
-      const quantityInput = this.parentNode.querySelector(".quantity");
-      const currentValue = parseInt(quantityInput.value);
-      if (currentValue > 1) {
-        quantityInput.value = currentValue - 1;
-        checkboxes[i].checked = false; // Zrušit zaškrtnutí checkboxu
-
-        // Aktualizovat subtotal
-        subtotals[i].value = quantityInput.value * prices[i].value;
-
-        // Vypočítání celkové hodnoty
-        var sum = subtotals.reduce(function (acc, curr, index) {
-          if (checkboxes[index].checked) {
-            return acc + parseInt(curr.value);
-          } else {
-            return acc;
-          }
-        }, 0);
-
-        total.value = "CZK " + sum;
-      }
-    });
-  });
-});
-
-const openModalBtn = document.querySelector(".open-modal-btn");
-const modal = document.querySelector(".services.modal");
-
-// Přidání posluchače události na kliknutí na tlačítko "Otevřít"
-openModalBtn.addEventListener("click", () => {
-  modal.classList.add("open");
-  document.body.style.overflow = "hidden"; // Zakáže rolování stránky
-});
-
-// Získání tlačítka pro zavření modálního okna
-const closeModalBtn = modal.querySelector(".close-modal-btn");
-
-// Přidání posluchače události na kliknutí na tlačítko pro zavření
-closeModalBtn.addEventListener("click", () => {
-  modal.classList.remove("open");
-  document.body.style.overflow = "auto"; // Povolí rolování stránky
-});
+// Počkáme, až se stránka načte
+window.onload = () => {
+  // Počkáme  (500 ms) a spustíme animaci
+  setTimeout(() => {
+    // Přidáme třídu 'hide', která začne animaci
+    imgElement.classList.add("hide");
+  }, 500);
+};

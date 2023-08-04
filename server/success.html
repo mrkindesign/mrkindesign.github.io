@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Úspěšné odeslání</title>
+
+
+
+</head>
+
+<body>
+    <img src="../img/leseni-bukacek-logo-sirkove-rgb.svg" class="bg_img" alt="">
+    <div class="success-message">
+        <h1>Úspěšně odesláno!</h1>
+        <p>Děkujeme za odeslání zprávy. Brzy se vám ozveme. :)</p>
+        <a href="../index.html" class="back-arrow">&#8678; Zpět na hlavní stránku</a>
+    </div>
+    <div class="loading-indicator">
+        <div class="spinner"></div>
+        <p id="countdown">10</p>
+    </div>
+</body>
+
+</html>
+
+
+<style>
+    :root {
+        --main-color: #14a83c;
+        --background-color: #131313;
+        --text-color: #ffffff;
+        --text-second-color: #a9a9a9;
+        --secondary-color: #2b2b2b;
+        --complement-color: #0f6b2c;
+        --input-border-color: #ccc;
+        --input-border-radius: 5px;
+        --transition-speed: 0.3s;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        /* Přidáme moderní font */
+        background-color: var(--background-color);
+        /* Světlé pozadí pro moderní vzhled */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        /* Centrujeme obsah na střed stránky */
+    }
+
+    .bg_img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.3;
+        width: 100vw;
+        z-index: -1;
+    }
+
+    .success-message {
+        text-align: center;
+        background-color: white;
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: var(--secondary-color);
+
+    }
+
+    .success-message h1 {
+        color: var(--main-color);
+        margin-bottom: 20px;
+    }
+
+    .success-message p {
+        color: var(--text-second-color);
+        font-size: 18px;
+    }
+
+    .back-arrow {
+        display: inline-block;
+        color: #000;
+        font-size: 17px;
+        padding: 20px;
+        text-decoration: none;
+        background-color: #ffffff;
+        /* Přidáme okraj kolem šipky */
+        border-radius: 15px;
+        /* Zaoblené rohy pro moderní vzhled */
+        transition: background-color 0.3s, color 0.3s;
+        /* Plynulé přechody pro hover efekt */
+    }
+
+    .back-arrow:hover {
+        background-color: var(--main-color);
+        /* Změna barvy pozadí a textu při najetí myší */
+        color: #fff;
+        border: none;
+    }
+
+    /* Vaše stávající CSS + nové CSS pro ukazatel */
+
+    .loading-indicator {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+        width: 60px;
+        color: #fff;
+    }
+
+    .spinner {
+        border: 4px solid #f3f3f3;
+        /* Light grey */
+        border-top: 4px solid var(--complement-color);
+        /* Blue */
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    let countdownValue = 3;
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.innerText = countdownValue;  // Přidáno pro zobrazení hodnoty 10 při načtení stránky
+
+    const countdown = setInterval(function () {
+        countdownValue--;
+        countdownElement.innerText = countdownValue;
+
+        if (countdownValue <= 0) clearInterval(countdown);
+    }, 1000);
+
+    setTimeout(function () {
+        window.location.href = '../#form-container';
+    }, 4000);
+</script>
