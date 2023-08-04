@@ -362,6 +362,14 @@ body {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 650px) {
+
+  .MainPageImg {
+
+    width: auto;
+    height: 200vw;
+
+  }
+
   .info_wrapper_text h2 {
     font-size: 16vw;
   }
@@ -1026,8 +1034,8 @@ input:focus {
     padding: 20px;
 
 
-    width: 80vw;
-    max-width: 50vw;
+    width: 100vw;
+
     text-align: center;
 
   }
@@ -1076,7 +1084,6 @@ input:focus {
     flex: 0 0 auto;
     padding: 20px;
     overflow: visible;
-    width: 80vw;
     text-align: center;
   }
 
