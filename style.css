@@ -665,10 +665,16 @@ body {
 
 
 @media only screen and (max-width: 1050px) {
+
+  #carousel {
+
+    height: 100vh;
+
+  }
+
   .carousel {
     width: 100vw;
     height: 100vh;
-    max-height: 80vh;
   }
 }
 
@@ -685,7 +691,7 @@ body {
 
   .carousel {
     width: 100vw;
-    height: 80vh;
+    height: 100vh;
 
   }
 
@@ -1054,9 +1060,14 @@ input:focus {
   }
 }
 
-@media screen and (max-width: 900px) {
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 900px) {
+
   #scaffolding-container {
     flex-direction: column;
+    height: 100vh;
   }
 
   .services {
@@ -1071,14 +1082,6 @@ input:focus {
   #result {
 
     font-size: 1em;
-  }
-}
-
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (max-width: 900px) {
-  #scaffolding-container {
-    height: 70vh;
   }
 
   .scaffolding-item {
@@ -1121,6 +1124,17 @@ input:focus {
 .contact_wrap p {
   color: #b5b5b5;
   font-size: 18px;
+}
+
+.contact_wrap a {
+  color: #b5b5b5;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.contact_wrap a:hover {
+  color: var(--complement-color);
+
 }
 
 .contact_container {

@@ -193,7 +193,7 @@ function calculate() {
   errorElement.style.display = "none";
   resultElement.style.display = "block"; // Tento řádek zobrazí výsledkový element
 
-  var pricePerDay = 10;
+  var pricePerDay = 120;
   var daysInMonth = 30;
   var result = squareMeters * pricePerDay * daysInMonth;
 
@@ -233,14 +233,14 @@ window.onload = function () {
 };
 
 //////////////////////////////////////////////////////////////
-// Získáme odkaz na obrázek
+//  odkaz na obrázek
 const imgElement = document.querySelector(".MainPageImg");
 
-// Počkáme, až se stránka načte
+// stránka načte
 window.onload = () => {
   // Počkáme  (500 ms) a spustíme animaci
   setTimeout(() => {
     // Přidáme třídu 'hide', která začne animaci
     imgElement.classList.add("hide");
-  }, 500);
+  }, 100);
 };
