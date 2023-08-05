@@ -194,8 +194,8 @@ function calculate() {
   resultElement.style.display = "block"; // Tento řádek zobrazí výsledkový element
 
   var pricePerDay = 120;
-  var daysInMonth = 30;
-  var result = squareMeters * pricePerDay * daysInMonth;
+  var InMonth = 1;
+  var result = squareMeters * pricePerDay * InMonth;
 
   resultElement.innerHTML =
     "Odhadovaná cena za měsíc (montáž, pronájem, demontáž): " + result + " Kč";

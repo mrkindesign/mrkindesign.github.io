@@ -53,10 +53,10 @@
             $mail->Subject = 'LESENI-BUKACEK ZPRÁVA';
             $mail->Body = '
     <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; border-radius: 5px; border: 1px solid #ccc;">
-        <h2 style="color: #14a83c;">Nová zpráva z kontaktního formuláře</h2>
-        <p><strong>Jméno:</strong> ' . htmlspecialchars($jmeno, ENT_QUOTES, 'UTF-8') . '</p>
-        <p><strong>Email:</strong> ' . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . '</p>
-        <p><strong>Zpráva:</strong> ' . nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) . '</p>
+        <div> Nová zpráva z kontaktního formuláře <h2 style="color: #14a83c;"> LESENIBUKACEK</h2>  </div>
+        <p><strong>Jméno:</strong> <br> ' . htmlspecialchars($jmeno, ENT_QUOTES, 'UTF-8') . '</p>
+        <p><strong>Email:</strong> <br> ' . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . '</p>
+        <p><strong>Zpráva:</strong><br>' . nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) . '</p>
     </div>';
 
 

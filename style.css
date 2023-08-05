@@ -986,16 +986,16 @@ input:focus {
 #result {
   display: none;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 18px;
+
 }
 
 #result.show {
   display: block;
+  animation: animateCalculation 0.3s;
+
 }
 
-#calculation {
-  animation: animateCalculation 2s 1;
-}
 
 @keyframes animateCalculation {
   0% {
